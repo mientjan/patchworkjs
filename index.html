@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Patchwork JS</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <script type="text/javascript" src='js/mootools-core-1.4.5-full-nocompat.js'></script>
+        <script type="text/javascript" src='js/mootools-more-1.4.0.1.js'></script>
+        <script type="text/javascript" src='js/DestructableEvents.js'></script>
+        <script type="text/javascript" src='js/HasElement.js'></script>
+        <script type="text/javascript" src='js/Buffer.js'></script>
+        <script type="text/javascript" src='js/Patch.js'></script>
+        <script type="text/javascript" src='js/PatchEvent.js'></script>
+        <script type="text/javascript" src='js/Editor.js'></script>
+        <script type="text/javascript" src='js/Node.js'></script>
+        <script type="text/javascript" src='js/modules/AbstractModule.js'></script>
+        <script type="text/javascript" src='js/modules/Modules.js'></script>
+        <script type="text/javascript" src='js/Connection.js'></script>
+        <script type="text/javascript" src='js/Transput.js'></script>
+        <script type="text/javascript" src='js/ConnectionsManager.js'></script>
+        <script type="text/javascript" src='js/ui/WaveDisplay.js'></script>
+        <script type="text/javascript" src='js/ui/Colors.js'></script>
+        <script type="text/javascript" src='js/modules/OscillatorModule.js'></script>
+        <script type="text/javascript" src='js/modules/DestinationModule.js'></script>
+        <script type="text/javascript" src='js/modules/BufferSourceModule.js'></script>
+        <script type="text/javascript" src='js/modules/BiquadFilterModule.js'></script>
+        <script type="text/javascript" src='js/modules/DelayModule.js'></script>
+        <script type="text/javascript" src='js/modules/AnalyserModule.js'></script>
+        <script type="text/javascript" src='js/modules/PannerModule.js'></script>
+        <script type="text/javascript" src='js/modules/ConvolverModule.js'></script>
+        <script type="text/javascript" src='js/modules/CompressorModule.js'></script>
+        <script type="text/javascript" src='js/modules/ChannelSplitterModule.js'></script>
+        <script type="text/javascript" src='js/modules/ChannelMergerModule.js'></script>
+        <script type="text/javascript" src='js/modules/GainModule.js'></script>
+        <script type="text/javascript" src='js/modules/MediaStreamModule.js'></script>
+        <script type="text/javascript" src='js/modules/MediaElementModule.js'></script>
+        <script type="text/javascript" src='js/modules/ModuleDefinitions.js'></script>
+        
+        
+        <script type="text/javascript">
+        	
+    	window.addEventListener('load', init, false);
+    	var context;
+    	var patch;
+    	
+    	function init()
+    	{
+    		try
+			{
+				context = new webkitAudioContext();
+			}
+			catch(e)
+			{
+				alert('Web Audio API not available. Please run in Chrome.');
+			}
+			
+			//document.onselectstart = function(){ return false; }
+			patch = new Patch(context);
+			
+			editor = new Editor(document.id('editor'));
+			editor.setPatch(patch);
+
+    	}
+    	
+    	function addModule()
+    	{
+    		var moduleType = $('module_select').value;
+    		//module = new Module(moduleType, context);
+    		patch.addNewModuleByType(moduleType);
+    	}
+    	
+    	function addBuffer()
+    	{
+    		//module = new Module(moduleType, context);
+    		patch.addBuffer();
+    	}
+    	
+    	
+    	function toJSON()
+    	{
+    		console.log(JSON.stringify(patch));
+    	}
+    	
+    	function getObjectClass(obj)
+    	{
+	    	if (obj && obj.constructor && obj.constructor.toString)
+	    	{
+	        	var arr = obj.constructor.toString().match(
+	            /function\s*(\w+)/);
+	
+	        	if (arr && arr.length == 2)
+	        	{
+	            	return arr[1];
+	        	}
+	    	}
+    
+		}
+    	
+        	
+        </script>
+        <div id="controls">
+        	<h1>Patchwork JS</h1>
+        	<select id="module_select">
+				<option value="destination">Destination</option>
+				<option value="biquad_filter">Biquad Filter</option>
+				<option value="delay">Delay</option>
+				<option value="analyser">Analyser</option>
+				<option value="panner">Panner</option>
+				<option value="convolver">Convolver</option>
+				<option value="gain">Gain</option>
+				<option value="compressor">Compressor</option>
+				<option value="channel_splitter">Channel Splitter</option>
+				<option value="channel_merger">Channel Merger</option>
+				<option value="oscillator" selected>Oscillator</option>
+				<!--<option value="media_stream">Media Stream</option>-->
+				<option value="media_element">Media Element</option>
+				<option value="buffer_source">Buffer Source</option>
+			</select>
+        	<button type="button" onclick="addModule()">Add selected module</button>
+        	<button type="button" onclick="addBuffer()">Add buffer</button>
+        	<button type="button" onclick="toJSON()">Patch to JSON</button>
+        </div>
+        <div id="editor"></div>
+        <div style='margin-top: 10px; font-size: 10px;'>
+        	You can use the sound from this player by adding a MediaElement to the patch. The sound from the player will be rerouted through the output of the module.
+        </div>
+        <audio controls="controls" id='media_element'>
+			<source src="audio/flim.mp3" type="audio/mp3" />
+		</audio> 
+    </body>
+</html>

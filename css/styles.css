@@ -1,0 +1,225 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: Oxygen;
+}
+
+/* editor */
+
+#editor
+{
+	width: 100%;
+	height: 400px;
+	background-color: #ccc;
+}
+
+#view
+{
+	position: relative;
+}
+
+#controls
+{
+	
+	color: white;
+	background-color: #000;
+	padding: 1px 10px;
+}
+
+#connections_canvas
+{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#nodes_layer
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#footer
+{
+	height: 90px;
+	background-color: #333;
+
+	width: 100%;
+}
+
+
+/*  module */
+
+.node
+{
+	width: 180px;
+	position: absolute;
+	user-select: none;
+	
+	-webkit-user-select: none;
+}
+.node a.remove-node
+{
+	font-weight: bold;
+	color: white;
+	float: right;
+	font-size: 14px;
+	text-decoration: none;
+}
+.node .header
+{
+	background-color: black;
+	font-size: 12px;
+	color: white;
+	padding: 5px; 
+	height: 15px;
+	box-shadow: 4px 4px 5px rgba(0,0,0,0.3);
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	cursor: move;
+}
+.node .content
+{
+	background-color: white;
+	font-size: 12px;
+	color: black;
+	padding: 5px;
+	box-shadow: 4px 4px 5px rgba(0,0,0,0.3);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+/* inputs & outputs */
+
+.node .transputs
+{
+	height: 12px;
+}
+
+.node .transput
+{
+	background-color: #555;
+	color: white;
+	width: 15px;
+	height: 12px;
+	margin-left: 12px;
+	float: left;
+}
+
+.node .transput:hover
+{	
+	background-color: #fc5300;
+}
+
+/* module controls */
+
+.slider
+{
+	margin: 0 0 5px 0;
+}
+.slider .info
+{
+	display: block;
+	font-size: 10px;
+	
+}
+.slider .info .value
+{
+	margin-left: 5px;
+	font-style: bold;
+}
+.slider .track
+{
+	width: 165px;
+	height: 15px;
+	background-color: #bbb;
+	box-shadow: inset 2px 2px 2px #888;
+	border-radius: 3px;
+}
+.slider .knob
+{
+	width: 15px;
+	height: 15px;
+	background-color: #000;
+	border-radius: 3px;
+}
+
+canvas.analyser
+{
+	height: 200px;
+	background-color: #000;
+}
+
+.slider .knob:hover
+{
+	background-color: #fc5300;
+}
+
+/* footer */
+
+.buffer
+{
+	width: 150px;
+	height: 60px;
+	margin: 10px;
+	padding: 5px;
+	float: left;
+	background-color: #666;
+	color: white;
+	border-radius: 4px;
+	border: 1px solid #222;
+	position: relative;
+}
+
+.buffer a.close
+{
+	color: white;
+	float: right;
+	font-size: 14px;
+	text-decoration: none;
+	font-weight: bold;
+	position: absolute;
+	bottom: 0;
+	right: 5px;
+}
+
+.buffer .unloaded
+{
+}
+
+.buffer .loading
+{
+}
+
+.buffer .loaded
+{
+}
+
+.buffer input
+{
+	border: 0px;
+	width: 150px;
+	color: #777;
+}
+.buffer .wave
+{
+	width: 150px;
+	height: 45px;
+}
+
+.buffer .info
+{
+	font-size: 10px;
+	margin: 5px 0px;
+}
+
+/* ui */
+.wave_display
+{
+	background-color: #000; 
+}
+
